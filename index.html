@@ -1,0 +1,44 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Down Timer</title>
+</head>
+
+<body>
+    <form action="">
+        <input type="date" id="date" placeholder="Select dat"><input type="time" id="time"><button type="submit"
+            id="submit">Submit</button>
+    </form>
+    <div>
+
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const submitBtn = document.getElementById("submit");
+        const date = document.getElementById("date");
+        const time = document.getElementById("time");
+        var targetDate;
+        const resultElement = document.getElementById("result");
+        function calculate() {
+            submitBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                targetDateString = date.value + " " + time.value;
+                const targetDate = new Date(targetDateString);
+                const now = new Date();
+                const diff = targetDate - now;
+                const days = Math.floor(diff / 86400000);
+                const hours = Math.floor(((diff / 86400000) - Math.floor(diff / 86400000)) * 24);
+                const minutes = Math.floor((((diff / 86400000) - Math.floor(diff / 86400000)) * 24) - hours);
+                const seconds = Math.floor(((((diff / 86400000) - Math.floor(diff / 86400000)) * 24) - hours) - minutes);
+                resultElement.innerHTML = `${days} D : ${hours} h : ${minutes} m : ${seconds} s`;
+            })
+        }
+        setInterval(calculate, 1000);
+    </script>
+</body>
+
+</html>
